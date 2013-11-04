@@ -82,6 +82,11 @@ module parallell_joints() {
 		for (i = [-1,1]) {
 			translate([0, i*(nut_offset-1), 0]) rotate([-i*90,0,0]) m3_nut(m3_nut_h+1);
 		}
+	
+		// Trim top and bot
+		translate([0,0,platform_thickness]) cube([50,100,platform_thickness], center = true);
+		translate([0,0,-platform_thickness]) cube([50,100,platform_thickness], center = true);
+	
 	}
 	
 	// For render
@@ -127,9 +132,6 @@ module platform() {
 		for(i = [60,180,300])
 			rotate(i) translate([25,0,0]) cylinder(r=1.5,h=h+1, center = true);
 		
-		// Trim top and bot
-		translate([0,0,platform_thickness/2]) cylinder(r=50, h = 10);
-		translate([0,0,-(platform_thickness/2+10)]) cylinder(r=50, h = 10);
 	}
 	
 }
