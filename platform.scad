@@ -1,6 +1,7 @@
 $fn = 50;
 include <configuration.scad>
 debug = 1;
+vitamins = 1;
 
 h = platform_thickness;
 
@@ -90,20 +91,21 @@ module parallell_joints() {
 	}
 	
 	// For render
-	%color([1,0,0,0.5])
-	for(i=[-1,1]) {	
-		// Screws
-		translate([0,-i*(arm_distance/2+ball_collar_width/2),0]) rotate ([i*90,0,0]) m3_capscrew(screw_length);
-		
-		// Ball link
-		translate([0,i*arm_distance/2,0]) rotate([90,0,0])ball_collar();
-		
-		// Ball link washer
-		translate([0,i*washer_offset,0]) rotate([-i*90,0,0]) m3_washer(m3_washer_width);
-		
-		// Trapped nut
-		translate([0,i*(nut_offset+1),0]) rotate([-i*90,0,0]) m3_nut(m3_nut_h);
-		
+	if (vitamins) {
+		%color([1,0,0,0.5])
+		for(i=[-1,1]) {	
+			// Screws
+			translate([0,-i*(arm_distance/2+ball_collar_width/2),0]) rotate ([i*90,0,0]) m3_capscrew(screw_length);
+			
+			// Ball link
+			translate([0,i*arm_distance/2,0]) rotate([90,0,0])ball_collar();
+			
+			// Ball link washer
+			translate([0,i*washer_offset,0]) rotate([-i*90,0,0]) m3_washer(m3_washer_width);
+			
+			// Trapped nut
+			translate([0,i*(nut_offset+1),0]) rotate([-i*90,0,0]) m3_nut(m3_nut_h);
+		}
 	}
 }
 
@@ -136,7 +138,7 @@ module platform() {
 	
 }
 
-if (debug == 1) {
+if (debug) {
 	difference() {
 		platform();
 		cylinder(r=50, h = 10);
