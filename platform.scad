@@ -80,7 +80,7 @@ module parallell_joints() {
 		rotate([90,0,0]) cylinder(r=m3_screw_radius, h=arm_distance, center = true);
 		
 		for (i = [-1,1]) {
-			translate([0, i*(nut_offset), 0]) rotate([-i*90,0,0]) m3_nut(m3_nut_h+1);
+			translate([0, i*(nut_offset-1), 0]) rotate([-i*90,0,0]) m3_nut(m3_nut_h+2);
 		}
 	
 		// Trim top and bot
