@@ -72,9 +72,11 @@ module parallell_joints() {
 	difference() {
 		union() {
 			for (i = [-1,1]) {
-				translate([0,-i*offset,0]) rotate([i*90,0,0]) cone();
 				translate([cone_base_radius,i*(offset-block_length/2),0]) cube([10,block_length,h], center = true);
-				translate([0,i*offset,0]) rotate([i*90,0,0]) cylinder(r=cone_base_radius, h=block_length);
+				hull() {
+					translate([0,i*offset,0]) rotate([-i*90,0,0]) cone();
+					translate([0,i*offset,0]) rotate([i*90,0,0]) cylinder(r=cone_base_radius, h=block_length);
+				}
 			}
 		}
 		
