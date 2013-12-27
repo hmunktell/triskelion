@@ -21,6 +21,12 @@ module carriage() {
 						
 			// Belt mount
 			translate([6, 4.5, -15]) rotate([0, 270, 90]) dog_linear(T2, 15, 10, 4);
+			
+			// Reinforcements
+			for(i=[-1,1]) {
+				translate([-i*16,-5,0]) rotate([0,0,i*20]) rotate([0,0,-30]) cylinder(h=linear_bearing_height+1, r=10, center=true, $fn=3);
+			}			
+			
 		}
 		
 		for(i=[-smooth_rod_distance/2,smooth_rod_distance/2]) {
