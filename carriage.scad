@@ -1,9 +1,15 @@
 $fn = 50;
-use <platform.scad>
+use  <platform.scad>
 include <configuration.scad>
 include <cogsndogs.scad>
 
 module carriage() {
+	a = 6;
+	b = 15;
+	c = sqrt(a*a+b*b);
+	v = atan(b/a);
+	echo (c);
+	
 	difference() {
 		union() {
 			// Parallell joints
@@ -22,9 +28,8 @@ module carriage() {
 			// Belt mount
 			translate([6, 4.5, -15]) rotate([0, 270, 90]) dog_linear(T2, 15, 10, 4);
 			
-			// Reinforcements
+			// Reinforcements linear bearing
 			for(i=[-1,1]) {
-				//#translate([-i*16,-5,0]) rotate([0,0,i*20]) rotate([0,0,-30]) cylinder(h=linear_bearing_height+1, r=10, center=true, $fn=3);
 				translate([i*15,1,0]) rotate([0,0,i*45]) rotate([0,0,45]) {
 					difference() {
 						cube([15,15,linear_bearing_height+1], center=true);
@@ -32,6 +37,16 @@ module carriage() {
 					}
 				}
 			}			
+
+			// Reinforcements of parallell joints
+			translate([-35.9/2,-18,-4])
+				for(i=[-1,1]) {
+
+					difference() {
+						cube([35.9,a,b]);
+						rotate([v,0,0]) translate([-1,0,0]) cube([37,c,c]);
+					}
+				}
 			
 		}
 		
