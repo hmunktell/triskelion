@@ -32,7 +32,7 @@ module carriage() {
 		}
 		
 		// Screw hole for adjustable top endstop.
-		translate([15, -16, -height/2+4]) cylinder(r=1.5, h=30, center=true, $fn=12);
+		#translate([15, -16, 0]) cylinder(r=1.5, h=30, center=true, $fn=12);
 
 		// Clip top and bottom
 		// for(i=[-1,1]) {			
