@@ -1,7 +1,5 @@
 $fn = 50;
 include <configuration.scad>
-debug = 0;
-vitamins = 1;
 
 h = platform_thickness;
 
