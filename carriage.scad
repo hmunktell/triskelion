@@ -19,7 +19,11 @@ module carriage() {
 			translate([0,-13,-linear_bearing_height/2+platform_thickness/2]) cube([8,10,platform_thickness], center=true);
 			
 			// Mount plate
-			translate([0,-4-5,0]) cube([smooth_rod_distance+linear_bearing_dia,8,linear_bearing_height+1], center=true);			
+			hull() {
+				for(i=[-1,1]) {
+					translate([i*(smooth_rod_distance+5)/2,-9,0]) cylinder(r=4, h=linear_bearing_height+1, center=true);
+				}
+			}			
 			
 			// Bearing mounts
 			translate([smooth_rod_distance/2,0,0]) rotate([0,180,0]) linear_bearing_mount();
