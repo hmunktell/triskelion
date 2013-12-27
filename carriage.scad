@@ -24,7 +24,13 @@ module carriage() {
 			
 			// Reinforcements
 			for(i=[-1,1]) {
-				translate([-i*16,-5,0]) rotate([0,0,i*20]) rotate([0,0,-30]) cylinder(h=linear_bearing_height+1, r=10, center=true, $fn=3);
+				//#translate([-i*16,-5,0]) rotate([0,0,i*20]) rotate([0,0,-30]) cylinder(h=linear_bearing_height+1, r=10, center=true, $fn=3);
+				translate([i*15,1,0]) rotate([0,0,i*45]) rotate([0,0,45]) {
+					difference() {
+						cube([15,15,linear_bearing_height+1], center=true);
+						translate([7.5,7.5,0]) rotate([0,0,45]) cube([15/cos(45),15/cos(45),linear_bearing_height+1], center=true);
+					}
+				}
 			}			
 			
 		}
@@ -65,13 +71,13 @@ module carriage() {
 module linear_bearing_mount() {
 	difference() {
 		union() {
-			cylinder(r=linear_bearing_dia/2+4, h=linear_bearing_height, center=true);
-			translate([0,8,0]) cube([linear_bearing_dia,15,linear_bearing_height], center=true);
+			cylinder(r=linear_bearing_dia/2+4, h=linear_bearing_height+1, center=true);
+			translate([0,8,0]) cube([linear_bearing_dia,15,linear_bearing_height+1], center=true);
 			
 			for(i=[-1,1]) {
 				translate([0,12,i*7.5]) {
 					// Nut reinforcement
-					translate([linear_bearing_dia/2,0,0]) rotate([30,0,0]) rotate([0,-90,0]) cylinder(r=5.2,h=5, $fn=6);//m3_nut(3.8);
+					translate([linear_bearing_dia/2,0,0]) rotate([30,0,0]) rotate([0,-90,0]) cylinder(r=5.1,h=5, $fn=6);//m3_nut(3.8);
 					
 					//Screw cap head reinforcement
 					translate([-linear_bearing_dia/2,0,0]) rotate([0,90,0]) cylinder(r=4.5,h=5);
