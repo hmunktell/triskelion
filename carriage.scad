@@ -61,6 +61,13 @@ module carriage() {
 			}
 		}
 		
+		// Taper
+		for(i=[-smooth_rod_distance/2,smooth_rod_distance/2]) {
+			for(j=[-1,1]) {
+				translate([i,0,j*linear_bearing_height/2]) rotate([90-j*90]) cylinder(r1=linear_bearing_dia/2, r2= linear_bearing_dia/2+1, h=2, center=true);	
+			}			
+		}
+		
 		// Screw hole for adjustable top endstop.
 		translate([15, -16, 0]) cylinder(r=1.2, h=30, center=true, $fn=12);
 
