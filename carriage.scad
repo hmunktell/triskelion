@@ -30,7 +30,7 @@ module carriage() {
 			translate([-smooth_rod_distance/2,0,0]) linear_bearing_mount();
 						
 			// Belt mount
-			translate([6, 4.5, -15]) rotate([0, 270, 90]) dog_linear(T2, 15, 10, 4);
+			translate([7, 4.5, -15]) rotate([0, 270, 90]) dog_linear(T2, 15, 10, 4);
 			
 			// Reinforcements linear bearing
 			for(i=[-1,1]) {
@@ -121,7 +121,7 @@ module linear_bearing_mount() {
 		for(i=[-1,1]) {
 			translate([0,12,i*7.5]) {
 				// Screw hole		
-				rotate([0,90,0]) cylinder(r=1.5, h=20, center=true);
+				rotate([0,90,0]) cylinder(r=3.1/2, h=20, center=true);
 				// Nut
 				translate([linear_bearing_dia/2-3,0,0]) rotate([30,0,0]) rotate([0,90,0]) m3_nut(3.8);
 				// Cap head
