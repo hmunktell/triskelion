@@ -110,10 +110,10 @@ module linear_bearing_mount() {
 			for(i=[-1,1]) {
 				translate([0,12,i*7.5]) {
 					// Nut reinforcement
-					translate([linear_bearing_dia/2,0,0]) rotate([30,0,0]) rotate([0,-90,0]) cylinder(r=5.1,h=5, $fn=6);//m3_nut(3.8);
+					translate([linear_bearing_dia/2,0,0]) rotate([30,0,0]) rotate([0,-90,0]) cylinder(r=5.1,h=5.4, $fn=6);//m3_nut(3.8);
 					
 					//Screw cap head reinforcement
-					translate([-linear_bearing_dia/2,0,0]) rotate([0,90,0]) cylinder(r=4.5,h=5);
+					translate([-linear_bearing_dia/2,0,0]) rotate([0,90,0]) cylinder(r=4.5,h=5.4);
 				}
 			}
 			
@@ -123,7 +123,7 @@ module linear_bearing_mount() {
 		translate([0,0,-(linear_bearing_height+1)/2]) polyhole(linear_bearing_dia, linear_bearing_height+1);
 		
 		// Cut out
-		translate([0,linear_bearing_dia/2,0]) cube([5,linear_bearing_dia+2,linear_bearing_height+1], center=true);
+		translate([0,linear_bearing_dia/2,0]) cube([5,linear_bearing_dia+10,linear_bearing_height+1], center=true);
 		
 		for(i=[-1,1]) {
 			translate([0,12,i*7.5]) {
@@ -139,4 +139,4 @@ module linear_bearing_mount() {
 }
 
 linear_bearing_mount();
-//carriage
+//carriage();
