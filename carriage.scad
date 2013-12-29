@@ -132,7 +132,7 @@ module linear_bearing_mount() {
 				// Nut
 				translate([linear_bearing_dia/2-3,0,0]) rotate([30,0,0]) rotate([0,90,0]) m3_nut(3.8);
 				// Cap head
-				translate([-linear_bearing_dia/2-1,0,0]) rotate([0,90,0]) cylinder(r=5.4/2, h=4);
+				translate([-linear_bearing_dia/2-1,0,0]) rotate([0,90,0]) cylinder(r=5.5/2, h=4);
 			}
 		}
 	}
