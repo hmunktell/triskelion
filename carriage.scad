@@ -94,11 +94,18 @@ module carriage() {
 	
 }
 
+// nophead's polyhole module for better lm8uu-fit
+module polyhole(d,h) {
+    n = max(round(2 * d),3);
+    rotate([0,0,180])
+        cylinder(h = h, r = (d / 2) / cos (180 / n), $fn = n);
+}
+
 module linear_bearing_mount() {
 	difference() {
 		union() {
-			cylinder(r=linear_bearing_dia/2+4, h=linear_bearing_height+1, center=true);
-			translate([0,8,0]) cube([linear_bearing_dia,15,linear_bearing_height+1], center=true);
+			cylinder(r=linear_bearing_dia/2+4, h=linear_bearing_height, center=true);
+			translate([0,8,0]) cube([linear_bearing_dia,15,linear_bearing_height], center=true);
 			
 			for(i=[-1,1]) {
 				translate([0,12,i*7.5]) {
@@ -113,7 +120,7 @@ module linear_bearing_mount() {
 		}
 		
 		// Linear bearing
-		cylinder(r=linear_bearing_dia/2, h=linear_bearing_height+1, center = true);
+		translate([0,0,-(linear_bearing_height+1)/2]) polyhole(linear_bearing_dia, linear_bearing_height+1);
 		
 		// Cut out
 		translate([0,linear_bearing_dia/2,0]) cube([5,linear_bearing_dia+2,linear_bearing_height+1], center=true);
@@ -131,5 +138,5 @@ module linear_bearing_mount() {
 	}
 }
 
-//linear_bearing_mount();
-carriage();
+linear_bearing_mount();
+//carriage
