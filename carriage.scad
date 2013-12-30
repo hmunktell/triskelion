@@ -4,11 +4,16 @@ include <configuration.scad>
 include <cogsndogs.scad>
 
 module carriage() {
-	a = 6;
-	b = 15;
+	a = 13;
+	b = 17;
 	c = sqrt(a*a+b*b);
 	v = atan(b/a);
 	echo (c);
+
+	// Bearing mounts
+	translate([smooth_rod_distance/2,0,0]) rotate([0,180,0]) linear_bearing_mount();
+	translate([-smooth_rod_distance/2,0,0]) linear_bearing_mount();
+
 	
 	difference() {
 		union() {
@@ -17,21 +22,14 @@ module carriage() {
 			
 			// Parallell joints middle reinforcement 
 			translate([0,-13,-linear_bearing_height/2+platform_thickness/2]) cube([8,10,platform_thickness], center=true);
-			
+
 			// Mount plate
 			hull() {
 				for(i=[-1,1]) {
 					translate([i*(smooth_rod_distance+5)/2,-9,0]) cylinder(r=4, h=linear_bearing_height+1, center=true);
 				}
-			}			
-			
-			// Bearing mounts
-			translate([smooth_rod_distance/2,0,0]) rotate([0,180,0]) linear_bearing_mount();
-			translate([-smooth_rod_distance/2,0,0]) linear_bearing_mount();
-						
-			// Belt mount
-			translate([7, 4.5, -15]) rotate([0, 270, 90]) dog_linear(T2, 15, 10, 4);
-			
+			}	
+
 			// Reinforcements linear bearing
 			for(i=[-1,1]) {
 				translate([i*15,1,0]) rotate([0,0,i*45]) rotate([0,0,45]) {
@@ -40,10 +38,10 @@ module carriage() {
 						translate([7.5,7.5,0]) rotate([0,0,45]) cube([15/cos(45),15/cos(45),linear_bearing_height+1], center=true);
 					}
 				}
-			}			
+			}	
 
 			// Reinforcements of parallell joints
-			translate([-35.9/2,-18,-4])
+			translate([-35.9/2,-25,-4])
 				for(i=[-1,1]) {
 
 					difference() {
@@ -51,21 +49,18 @@ module carriage() {
 						rotate([v,0,0]) translate([-1,0,0]) cube([37,c,c]);
 					}
 				}
-			
+
+			// Belt mount
+			translate([7, 4.5, -15]) rotate([0, 270, 90]) dog_linear(T2, 15, 10, 4);			
+
 		}
 		
-		for(i=[-smooth_rod_distance/2,smooth_rod_distance/2]) {
-			translate([i,0,0]) {
-				// Linear bearing
-				cylinder(r=linear_bearing_dia/2, h=linear_bearing_height+1, center = true);		
-			}
-		}
+		// Cutout vault
+		translate([0,-18,-linear_bearing_height/2+4+4]) rotate([90,0,0]) cylinder(r=3.5, h=10);
 		
-		// Taper
-		for(i=[-smooth_rod_distance/2,smooth_rod_distance/2]) {
-			for(j=[-1,1]) {
-				translate([i,0,j*linear_bearing_height/2]) rotate([90-j*90]) cylinder(r1=linear_bearing_dia/2, r2= linear_bearing_dia/2+1, h=2, center=true);	
-			}			
+		// Clear linear bearings
+		for(i=[-1,1]) {
+			translate([-i*smooth_rod_distance/2,0,0]) cylinder(r=linear_bearing_dia/2+2,h=linear_bearing_height+1, center=true);
 		}
 		
 		// Screw hole for adjustable top endstop.
@@ -75,8 +70,9 @@ module carriage() {
 		 for(i=[-1,1]) {			
 			  translate([0,0,i*(linear_bearing_height/2+5)]) cube([100,100,10], center=true);
 		}
-		
+	
 	}
+
 	
 	// For render
 	if (vitamins) {
@@ -135,8 +131,14 @@ module linear_bearing_mount() {
 				translate([-linear_bearing_dia/2-1,0,0]) rotate([0,90,0]) cylinder(r=5.5/2, h=4);
 			}
 		}
+		
+		// Chamfer entry holes
+		for(i=[-1,1]) {
+			translate([0,0,i*linear_bearing_height/2]) rotate([i*-90,0,0]) rotate([90,0,0]) cylinder(r1=linear_bearing_dia/2, r2= linear_bearing_dia/2+1, h=2, center=true);
+		}
+		
 	}
 }
 
-linear_bearing_mount();
-//carriage();
+//linear_bearing_mount();
+carriage();
