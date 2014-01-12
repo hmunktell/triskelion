@@ -1,5 +1,8 @@
 debug = 0;
 vitamins = 0;
+
+idler_end_height=28;
+motor_end_height=44;
 platform_thickness=8;
 arm_distance=50;
 platform_hinge_offset=33;
